@@ -8,3 +8,4 @@ data/*.xlsx
 Report.Rmd
 Report.docx
 output/*.docx
+RData
