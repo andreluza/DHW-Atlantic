@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+bugs_code
+docs
+data/*.xlsx
+Report.Rmd
+Report.docx
+output/*.docx
