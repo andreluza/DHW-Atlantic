@@ -25,7 +25,7 @@ Root
 |--- output\
 |----------- Figures and tables produced by the "Interpretation*.R" scripts shown below\
 \
-|--- RData: Model output in RData format:\
+|--- RData: Model output in RData format (folder created with 'Code_models.R'):\
 |----------- model_count_lat: latitude effect on DHW interval\
 |----------- model_count2_lat: latitude effect on DHW duration\
 |----------- model_count3_lat: latitude effect on intensity\
