@@ -7,14 +7,9 @@
 # -------------------------------------------
 
 rm(list=ls())
-require(here)
-require(ggplot2)
-require(dplyr)
-require(reshape)
-library(performance)
-require(brms)
-require(ggbreak)
 
+# load packages 
+source("RScript/packages.R")
 
 # load
 DHW_data <- read.csv (here("data", "DHW_raw_stats_table.csv"),sep=";")
@@ -29,11 +24,10 @@ load(here ("RData","model_count_lat.RData"))
 load(here ("RData","model_count2_lat.RData"))
 load(here ("RData","model_count3_lat.RData"))
 
-
 # calculate the Bayes R^2
-bayes_R2(model_count3_lat)
-bayes_R2(model_count2_lat)
-bayes_R2(model_count_lat)
+round(bayes_R2(model_count3_lat),3)
+round(bayes_R2(model_count2_lat, re_formula = NA),3)
+round(bayes_R2(model_count_lat, re_formula = NA),3)
 
 
 require(gridExtra)
@@ -62,7 +56,7 @@ p1 <-ce$lat %>%
              size=2,
              alpha=0.5)+
   xlab ("") + 
-  ylab ("Maximum DHW value in ºC-weeks")+
+  ylab ("Maximum DHW value in Celsius degrees-weeks")+
   scale_color_manual(values = c("Oceanic islands" = "green",
                                 "North" = "blue",
                                 "Northeast" = "pink",
@@ -155,15 +149,18 @@ ggsave (here ("output", "trend-lat.pdf"),
 
 
 # Posterior exceedance probabilities --------------------------------
-PEP <- rbind(interval = table(as_draws_array(model_count_lat,variable = "b_scalelat")>0)/prod(dim(as_draws_array(model_count_lat,variable = "b_scalelat"))),
+PEP <- rbind(intensity = table(as_draws_array(model_count3_lat,variable = "b_scalelat")>0)/prod(dim(as_draws_array(model_count3_lat,variable = "b_scalelat"))),
              duration = table(as_draws_array(model_count2_lat,variable = "b_scalelat")>0)/prod(dim(as_draws_array(model_count2_lat,variable = "b_scalelat"))),
-             intensity = table(as_draws_array(model_count3_lat,variable = "b_scalelat")>0)/prod(dim(as_draws_array(model_count3_lat,variable = "b_scalelat"))))
+             interval = table(as_draws_array(model_count_lat,variable = "b_scalelat")>0)/prod(dim(as_draws_array(model_count_lat,variable = "b_scalelat")))
+             )
 
 # posterior summary
 tab_coef_lat <- rbind(
-  data.frame(posterior_summary(model_count_lat)[1:6,],model="Interval"),
-  data.frame (posterior_summary(model_count2_lat)[1:6,],model="Duration"),
-  data.frame(posterior_summary(model_count3_lat)[1:7,],model="Intensity")
+  
+  data.frame(posterior_summary(model_count3_lat)[1:4,],model="Intensity"),
+  data.frame (posterior_summary(model_count2_lat)[1:4,],model="Duration"),
+  data.frame(posterior_summary(model_count_lat)[1:4,],model="Interval")
+  
   ) 
 
 # kable

@@ -1,19 +1,12 @@
 # -------------------------------------------
 
-# Model interpretation - region and time effect
+# Model interpretation - ii) region and time effect
 
 # -------------------------------------------
 rm(list=ls())
-require(here)
-require(ggplot2)
-require(dplyr)
-require(reshape)
-require(performance)
-require(brms)
-require(ggbreak)
 
-# fig 2 - mudar cores
-# - fazer uma para cada regiao - suplementar.
+# load packages 
+source("RScript/packages.R")
 
 # load
 DHW_data <- read.csv (here("data", "DHW_raw_stats_table.csv"),sep=";")
@@ -25,9 +18,16 @@ DHW_data$interval[is.na(DHW_data$interval)] <- 0
 
 
 # load estimated models
-load("model_count.RData")
-load("model_count2.RData")
-load("model_count3.RData")
+load("RData/model_count.RData")
+load("RData/model_count2.RData")
+load("RData/model_count3.RData")
+
+# calculate the Bayes R^2
+bayes_R2(model_count3) # conditional + marginal
+bayes_R2(model_count2)  # conditional + marginal
+bayes_R2(model_count2,re_formula=NA) # marginal
+bayes_R2(model_count)  # conditional + marginal
+bayes_R2(model_count,re_formula=NA) # marginal
 
 # obtain the marginal effects
 require(emmeans)
@@ -120,30 +120,6 @@ p1 <- ce$`year:region` %>%
   scale_x_continuous(breaks = seq(1985,2024, 3) ) +
   theme(text = element_text (family = "serif"))
 
-## zero inflation portion
-#zi <- conditional_effects(model_count3,dpar = "hu")
-#zi1<- zi$year %>%
-#  ggplot(aes(x=year,y=estimate__))+
-#  theme_classic()+
-#  geom_ribbon(aes(ymin = lower__, ymax = upper__),colour=NA,alpha=0.2)+
-#  geom_line(stat="identity")+
-#  xlab ("Time") + 
-#  ylab ("Predicted probability of\nºC-weeks = 0")+ 
-#  scale_x_continuous(breaks = seq(1985,2024, 3) ) +
-#  scale_y_continuous(limits = c(0.5,1)) +
-#  theme(axis.text.x = element_text(angle=90)) +
-#  theme(text = element_text (family = "serif"))+
-#  ylim(c(0,1))+
-#  geom_point(data = DHW_data %>% 
-#               mutate (region,region = recode(region, ILOC = "Oceanic islands")) %>%
-#               mutate (intensity, intensity = ifelse (intensity >0,0,1))
-#             ,aes(x=year,y=intensity),
-#             shape=19,
-#             size=2,
-#             alpha=0.5)+
-#  ggtitle ("d")
-
-  
 # duration -----------------------------------------
 # conditional effects
 ce <- conditional_effects(model_count2,effects = NULL )
@@ -180,29 +156,6 @@ p2 <-ce$`year:region` %>%
   scale_x_continuous(breaks = seq(1985,2024, 3) ) +
   theme(text = element_text (family = "serif"))
 
-
-# zero inflation portion
-#zi <- conditional_effects(model_count2,dpar = "zi")
-#zi2 <- zi$year %>%
-#  ggplot(aes(x=year,y=estimate__))+
-#  theme_classic()+
-#  geom_ribbon(aes(ymin = lower__, ymax = upper__),colour=NA,alpha=0.2)+
-#  geom_line(stat="identity")+
-#  xlab ("Time") + 
-#  ylab ("Predicted probability of\nDHW duration = 0")+ 
-#  scale_x_continuous(breaks = seq(1985,2024, 3) ) +
-#  scale_y_continuous(limits = c(0.5,1)) +
-#  theme(axis.text.x = element_text(angle=90)) +
-#  theme(text = element_text (family = "serif"))+
-#  ylim(c(0,1))+
-#  geom_point(data = DHW_data %>% 
-#               mutate (region,region = recode(region, ILOC = "Oceanic islands")) %>%
-#               mutate (duration, duration = ifelse (duration >0,0,1))
-#             ,aes(x=year,y=duration),
-#             shape=19,
-#             size=2,
-#             alpha=0.5)+
-#  ggtitle ("e")
   
 # interval -----------------------------------------
 # conditional effects
@@ -246,34 +199,9 @@ p3 <- ce$`year:region` %>%
 
 p3
 
-# zero inflation portion
-#zi <- conditional_effects(model_count,dpar = "zi")
-#zi3 <- zi$year %>%
-#  ggplot(aes(x=year,y=estimate__))+
-#  theme_classic()+
-#  geom_line(stat="identity")+
-#  geom_ribbon(aes(ymin = lower__, ymax = upper__),colour=NA,alpha=0.2)+
-#  xlab ("Time") + 
-#  ylab ("Predicted probability of\nDHW frequency = 0")+ 
-#  scale_x_continuous(breaks = seq(1985,2024, 3) ) +
-#  scale_y_continuous(limits = c(0.5,1)) +
-#  theme(axis.text.x = element_text(angle=90)) +
-#  theme(text = element_text (family = "serif"))+
-#  ylim(c(0,1))+
-#  geom_point(data = DHW_data %>% 
-#               mutate (region,region = recode(region, ILOC = "Oceanic islands")) %>%
-#               mutate (interval, interval = ifelse (interval >0,0,1))
-#             ,aes(x=year,y=interval),
-#             shape=19,
-#             size=2,
-#             alpha=0.5)+
-#  ggtitle ("f")
-
-
 # organize the plots
 pdf(here ("output", "Figu-2.pdf"),width=12,heigh=5)
 grid.arrange((p1),p2,p3,
-             #zi1,zi2,zi3,
              ncol=3
              )
 
@@ -284,7 +212,6 @@ dev.off()
 # organize the plots
 png(here ("output", "Figu-2.png"),width=25,height = 13,units = "cm",res=300)
 grid.arrange((p1),p2,p3,
-             #zi1,zi2,zi3,
              ncol=3
              )
 
@@ -313,7 +240,7 @@ p1reg <- ce$`year:region` %>%
   geom_ribbon(aes(ymin = lower__, ymax = upper__),colour=NA,alpha=0.2)+
   geom_line(stat="identity")+
   xlab ("Time") + 
-  ylab ("Maximum DHW value in ºC-weeks")+
+  ylab ("Maximum DHW value in Celsius degrees-weeks")+
   scale_color_manual(values = c("Oceanic islands" = "green",
                                 "North" = "blue",
                                 "Northeast" = "pink",
@@ -428,7 +355,6 @@ grid.arrange((p1reg),p2reg+theme(legend.position = "none"),print(p3reg),
              nrow=3)
 
 dev.off()
-
 
 # posterior exceedance
 draws_interval <- as_draws_df(model_count)

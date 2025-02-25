@@ -14,13 +14,8 @@
 
 rm(list=ls())
 
-# load empirical data -------------------------------------------------
-require(here)
-require(ggplot2)
-require(dplyr)
-require(reshape)
-library(performance)
-require(brms)
+# load packages 
+source("RScript/packages.R")
 
 # ----------------------------------------
 # load DHW data
@@ -112,6 +107,14 @@ check_overdispersion(glm(interval ~ lat, family = poisson, data = DHW_data %>% f
 nrow(DHW_data %>% filter (intensity>0))+nrow(DHW_data %>% filter (duration>0))+nrow(DHW_data %>% filter (interval>0))
 
 # i) Models evaluating latitude ----------------------
+
+# an alternative could be 
+#model_nb <- brm(bf(interval ~ scale(lat)), family = negbinomial(), data = #DHW_data %>%
+#    filter (interval > 0))
+#bayes_R2(model_nb,re.formula=NA)
+#pp_check(model_nb)
+#pp_check(model_count_lat)
+
 
 # interval ~ latitude
 model_count_lat <- brm(
