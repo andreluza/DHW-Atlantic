@@ -17,6 +17,9 @@ rm(list=ls())
 # load packages 
 source("RScript/packages.R")
 
+# create dir to receive results
+dir.create ("RData")
+
 # ----------------------------------------
 # load DHW data
 
