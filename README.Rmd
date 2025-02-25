@@ -1,0 +1,51 @@
+---
+title: "README"
+author: "ALLuza"
+date: "2025-02-25"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Repository containing the data and scripts used in the article "The thermal stress history of South Atlantic reefs reveals increasing intensity, duration, frequency, and likely undocumented bleaching episodes”, which you recently submitted to Global Change Biology.
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+# The project is organized as follows:
+
+Root
+
+|--- data\
+|----------- DHW_raw_stats_table.csv: raw DHW data set\
+\
+|--- output\
+|----------- Figures and tables produced by the "Interpretation*.R" scripts shown below\
+\
+|--- RData: Model output in RData format:\
+|----------- model_count_lat: latitude effect on DHW interval\
+|----------- model_count2_lat: latitude effect on DHW duration\
+|----------- model_count3_lat: latitude effect on intensity\
+|----------- model_count: time and region effects on DHW interval\
+|----------- model_count2: time and region effects on DHW duration\
+|----------- model_count3: time and region effects on intensity\
+\
+|--- RScript\
+|----------- packages.R: required packages \
+|----------- Code_models.R: building and fitting models to data \
+|----------- Interpretation_lat.R: Interpretation of models with latitude \
+|----------- Interpretation_time_Reg.R: Interpretation of models with time and region \
+
+
+#### This paper was produced using the following software and associated packages:
+
+```{r pressure, echo=F,warning=F,message=F}
+
+source("RScript/packages.R")
+sessionInfo()
+
+
+```
