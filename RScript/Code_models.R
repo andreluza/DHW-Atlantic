@@ -76,8 +76,7 @@ DHW_data %>%
   ggplot() +
   geom_point(aes(x=intensity, y=duration,colour=Region))+
   geom_smooth(aes(x=intensity, y=duration),
-              method = "glm", se=T,formula = "y ~ x" ,
-              method.args = list(family = "poisson")) + 
+              method = "loess", se=F) + 
   facet_wrap(~int,scales="fixed",ncol=6)+
   theme_classic()+
   scale_color_manual(values = c("Oceanic islands" = "green",
