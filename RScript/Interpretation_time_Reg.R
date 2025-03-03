@@ -104,7 +104,7 @@ p1 <- ce$`year:region` %>%
   geom_ribbon(aes(ymin = lower__, ymax = upper__),colour=NA,alpha=0.2)+
   geom_line(stat="identity")+
   xlab ("Time") + 
-  ylab ("Maximum DHW value in ºC-weeks")+
+  ylab ("Intensity (maximum DHW\nvalue in ºC-weeks)")+
   scale_color_manual(values = c("Oceanic islands" = "green",
                                 "North" = "blue",
                                 "Northeast" = "pink",
@@ -240,7 +240,7 @@ p1reg <- ce$`year:region` %>%
   geom_ribbon(aes(ymin = lower__, ymax = upper__),colour=NA,alpha=0.2)+
   geom_line(stat="identity")+
   xlab ("Time") + 
-  ylab ("Maximum DHW value in Celsius degrees-weeks")+
+  ylab ("Intensity (maximum DHW\nvalue in ºC-weeks)")+
   scale_color_manual(values = c("Oceanic islands" = "green",
                                 "North" = "blue",
                                 "Northeast" = "pink",

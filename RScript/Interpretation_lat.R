@@ -56,7 +56,7 @@ p1 <-ce$lat %>%
              size=2,
              alpha=0.5)+
   xlab ("") + 
-  ylab ("Maximum DHW value in Celsius degrees-weeks")+
+  ylab ("Maximum DHW value in ºC-weeks")+
   scale_color_manual(values = c("Oceanic islands" = "green",
                                 "North" = "blue",
                                 "Northeast" = "pink",
