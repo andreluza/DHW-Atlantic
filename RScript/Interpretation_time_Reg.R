@@ -23,6 +23,8 @@ load("RData/model_count2.RData")
 load("RData/model_count3.RData")
 
 # calculate the Bayes R^2
+# the reason for the high Bayesian R2 is explained here:
+# https://discourse.mc-stan.org/t/bayes-r2-and-conditioning-on-random-effects/20461/16
 bayes_R2(model_count3) # conditional + marginal
 bayes_R2(model_count2)  # conditional + marginal
 bayes_R2(model_count2,re_formula=NA) # marginal
@@ -385,3 +387,4 @@ table((draws_intensity[,11] - draws_intensity[,2])>0)/sum(table((draws_intensity
 table((draws_intensity[,12] - draws_intensity[,2])>0)/sum(table((draws_intensity[,7] - draws_intensity[,2])>0))
 
 # end
+
