@@ -1,13 +1,21 @@
-README
+The thermal stress history of South Atlantic reefs reveals increasing
+intensity, duration, frequency, and likely undocumented bleaching
+episodes
 ================
-ALLuza
-2025-02-25
+Giovanna Destri, Arthur Z. Güth, André L. Luza, Julia Y. Ibanhez,
+Marcelo Dottori, Ilson C. A. Silveira, Giulia B. Braz, Jacqueline L. De
+La Cour, Derek P. Manzello, William J. Skirving, Miguel Mies —
+2025-03-18
 
 Repository containing the data and scripts used in the article “The
 thermal stress history of South Atlantic reefs reveals increasing
 intensity, duration, frequency, and likely undocumented bleaching
-episodes”, by Destri et al. (Mies Lab), recently submitted to Global
-Change Biology.
+episodes”, by Destri et al., accepted in Global Change Biology on
+2025/04/16.
+
+The Zenodo’s DOI is:  
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15048069.svg)](https://doi.org/10.5281/zenodo.15048069)
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -39,11 +47,20 @@ shown below
 \|———– Interpretation_time_Reg.R: Interpretation of models with time and
 region  
 
+Notes:
+
+Figures 2 and 4, and all Supporting Information, can be reproduced by
+running the codes described above. The figures 1, 3, and 5 were not
+produced using R. Fig. 1 was produced using QGIS, and Figs. 3 and 5 were
+produced using Microsoft Excel (using the same spreadsheet stored in the
+folder “data”). A version of Fig. 3 can be obtained by running the R
+script “Code_models.R”.
+
 #### This paper was produced using the following software and associated packages:
 
     ## R version 4.4.1 (2024-06-14 ucrt)
     ## Platform: x86_64-w64-mingw32/x64
-    ## Running under: Windows 10 x64 (build 19045)
+    ## Running under: Windows 11 x64 (build 22631)
     ## 
     ## Matrix products: default
     ## 
@@ -79,7 +96,7 @@ region
     ## [37] matrixStats_1.4.1    lifecycle_1.0.4      stringr_1.5.1       
     ## [40] insight_0.20.5       pkgconfig_2.0.3      RcppParallel_5.1.9  
     ## [43] pillar_1.9.0         gtable_0.3.5         loo_2.8.0           
-    ## [46] glue_1.7.0           xfun_0.44            tibble_3.2.1        
+    ## [46] glue_1.7.0           xfun_0.51            tibble_3.2.1        
     ## [49] tidyselect_1.2.1     rstudioapi_0.16.0    knitr_1.48          
     ## [52] xtable_1.8-4         bayesplot_1.11.1     htmltools_0.5.8.1   
     ## [55] nlme_3.1-164         rmarkdown_2.28       compiler_4.4.1      

@@ -1,7 +1,8 @@
 ---
-title: "README"
-author: "ALLuza"
-date: "2025-02-25"
+title: "The thermal stress history of South Atlantic reefs reveals increasing intensity, duration, frequency, and likely undocumented bleaching episodes"
+author: "Giovanna Destri, Arthur Z. Güth, André L. Luza, Julia Y. Ibanhez, Marcelo Dottori, Ilson C. A. Silveira, Giulia B. Braz, Jacqueline L. De La Cour, Derek P. Manzello, William J. Skirving, Miguel Mies --- "
+
+date: "2025-03-18"
 output: github_document
 ---
 
@@ -10,7 +11,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-Repository containing the data and scripts used in the article "The thermal stress history of South Atlantic reefs reveals increasing intensity, duration, frequency, and likely undocumented bleaching episodes”, by Destri et al. (Mies Lab), recently submitted to Global Change Biology.
+Repository containing the data and scripts used in the article "The thermal stress history of South Atlantic reefs reveals increasing intensity, duration, frequency, and likely undocumented bleaching episodes”, by Destri et al., accepted in Global Change Biology on 2025/04/16.
+
+The Zenodo's DOI is:\
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15048069.svg)](https://doi.org/10.5281/zenodo.15048069)
+
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -39,6 +45,10 @@ Root
 |----------- Interpretation_lat.R: Interpretation of models with latitude \
 |----------- Interpretation_time_Reg.R: Interpretation of models with time and region \
 
+Notes:
+
+Figures 2 and 4, and all Supporting Information, can be reproduced by running the codes described above.
+The figures 1, 3, and 5 were not produced using R. Fig. 1 was produced using QGIS, and Figs. 3 and 5 were produced using Microsoft Excel (using the same spreadsheet stored in the folder "data"). A version of Fig. 3 can be obtained by running the R script "Code_models.R".
 
 #### This paper was produced using the following software and associated packages:
 
